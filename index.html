@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link href="./dist/output.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script defer src="index.js"></script>
+    <title>Frontend Mentor | Interactive card details form</title>
+  </head>
+  <body class="font-space-grotesk relative">
+    <main class="grid grid-cols-1 lg:grid-cols-12">
+
+      <!-- !GRADIENT BACKGROUND -->
+      <div
+        class="bg-[url(/images/bg-main-desktop.png)] w-full h-80 lg:h-screen bg-cover bg-center col-span-4 relative"
+      ></div>
+
+      <!-- !CARD FRONT IMG -->
+      <div
+        class="absolute bg-[url(/images/bg-card-front.png)] bg-cover w-[27.938rem] h-[15.313rem] scale-[0.80] md:scale-75 lg:scale-100 rounded-lg sm:left-36 md:left-72 top-32 lg:left-20 xl:left-48 text-white z-50"
+      >
+        <svg
+          width="84"
+          class="absolute top-8 left-12"
+          height="47"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <ellipse cx="23.478" cy="23.5" rx="23.478" ry="23.5" fill="#fff" />
+          <path
+            d="M83.5 23.5c0 5.565-4.507 10.075-10.065 10.075-5.559 0-10.065-4.51-10.065-10.075 0-5.565 4.506-10.075 10.065-10.075 5.558 0 10.065 4.51 10.065 10.075Z"
+            stroke="#fff"
+          />
+        </svg>
+        <!-- !CARD INFORMATION -->
+        <p
+          class="absolute font-normal text-3xl top-36 left-[2.75rem] tracking-wider"
+          id="number"
+        >
+          0000 0000 0000 0000
+        </p>
+        <p class="absolute top-52 left-[2.75rem] text-gray-200" id="name">
+          JANE APPLESEED
+        </p>
+        <span>
+          <span class="absolute top-52 right-[4.75rem] text-gray-200" id="month">00</span>
+          <span class="absolute top-52 right-[4.25rem] text-gray-200">/</span>
+          <span class="absolute top-52 right-[2.75rem] text-gray-200" id="year">00</span>
+        </span>
+      </div>
+
+      <!-- !CARD BACK IMG -->
+      <div
+        class="absolute bg-[url(/images/bg-card-back.png)] bg-cover h-[15.375rem] w-[27.938rem] scale-[0.80] md:scale-75 lg:scale-100  top-7  left-20 sm:left-52 md:left-96 lg:left-24 lg:top-1/2 xl:left-72 z-0"
+      >
+        <!-- !CVC INFORMATION -->
+        <p
+          class="absolute top-[6.75rem] left-[22rem] text-white font-bold tracking-wider" id="cvc-number"
+        >
+          000
+        </p>
+      </div>
+
+
+      <!-- !FORM SECTION -->
+      <form id="form" class="grid col-span-8 place-items-center my-20 " action="/" method="GET"> <!--TODO: Add Toggle Hidden and toggle grid-->
+        <div class="container w-[25.5rem]">
+          
+          <!-- !CARDHOLDER NAME INPUT -->
+          <div class="flex flex-col mb-5">
+            <label class=" font-medium text-sm text-newviolet-300 tracking-widest" for="name">CARDHOLDER NAME</label>
+            <input
+              class="h-10 border  border-red-600 rounded-md hover:border-gradient1 focus:border-gradient2 px-3" 
+              id="cardholder-name"
+              name="cardholder-name"
+              type="text"
+              placeholder="e.g. Jane Appleseed"
+              style="text-transform: uppercase"
+            />
+            <span id="cardholder-name-error" class=" text-red-400 hidden">Please complete this input</span>
+          </div>
+
+          <!-- !CARD NUMBER INPUT -->
+          <div class="flex flex-col mb-5">
+            <label class=" font-medium text-sm text-newviolet-300 border-red tracking-widest" for="name">CARD NUMBER</label>
+            <input
+              class=" h-10 border  border-red-600 rounded-md hover:border-gradient1 focus:border-gradient2 px-3"
+              id="card-number"
+              name="card-number"
+              type="text"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+              placeholder="e.g. 1234 5678 9103 0000"
+              oninput="if(this.value.length > this.maxLength) this.value=this.value.slice(0,this.maxLength)"
+              maxlength="16"
+              minlength="16"
+              required
+            />
+          <span id="card-number-error" class="text-red-400 hidden">Please complete this input</span>
+          </div>
+
+
+          <!-- !EXP DATE INPUT -->
+          <div class="flex gap-3 mb-10">
+            <div class="">
+              <label class=" font-medium text-sm text-newviolet-300 tracking-widest" for="name">EXP. DATE (MM/YY)</label>
+              <div class="flex gap-2">
+                <input
+                  class="w-20 h-10 border border-red-600 rounded-md hover:border-gradient1 focus:border-gradient2  px-3"
+                  id="month-input"
+                  name="exp-date"
+                  type="text"
+                  placeholder="MM"
+                  maxlength="2"
+                  minlength="2"
+                />
+                
+                <input
+                  class="w-20 h-10 border border-red-600 rounded-md hover:border-gradient1 focus:border-gradient2 px-3"
+                  id="year-input"
+                  name="exp-date"
+                  type="text"
+                  placeholder="YY"
+                  maxlength="2"
+                />
+              </div>
+              <span id="exp-error" class="text-red-400 hidden">Please complete this input</span>
+            </div>
+            
+            <!-- !CVC INPUT -->
+            <div class="flex flex-col">
+              <label class=" font-medium text-sm text-newviolet-300 tracking-widest" for="name">CVC</label>
+              <input
+                class="h-10 border border-red-600 rounded-md hover:border-gradient1 focus focus:border-gradient2 px-3"
+                id="cvc"
+                name="cvc"
+                type="text"
+                placeholder="e.g. 123"
+                maxlength="3"
+              />
+              <span id="cvc-error" class=" text-red-400 hidden">Please complete this input</span>
+            </div>
+          </div>
+
+          <!-- !CONFIRM BUTTON -->
+          <button id="confirm-btn" class="rounded-lg bg-newviolet-300 text-newviolet-100 w-full p-3 text-xl" type="submit">
+            <p>Confirm</p>
+          </button>
+        </div>
+      </form>
+
+      <!-- !CONTINUE BUTTON to RESET -->
+      <div id="completed" class="col-span-8 flex-col mt-40 lg:my-auto gap-10 text-center hidden transition-opacity  duration-300 ease-linear transform">
+        <svg class="mx-auto mb-10" width="80" height="80" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="40" fill="url(#a)"/><path d="M28 39.92 36.08 48l16-16" stroke="#fff" stroke-width="3"/><defs><linearGradient id="a" x1="-23.014" y1="11.507" x2="0" y2="91.507" gradientUnits="userSpaceOnUse"><stop stop-color="#6348FE"/><stop offset="1" stop-color="#610595"/></linearGradient></defs></svg>
+        <div>
+          <h2 class=" text-newviolet-300 text-2xl font-semibold tracking-widest">THANK YOU!</h2>
+          <p class=" text-newviolet-200">We've added your card details</p>
+        </div>
+        <button id="continue-btn" class="rounded-lg bg-newviolet-300 text-newviolet-100 w-1/3 p-3 text-xl mt-11" type="reset">
+          <p>Continue</p>
+        </button>
+      </div>
+
+    </main>
+
+
+    <div class="attribution text-center">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="https://github.com/cheesezzzz/">Huy Nguyen</a>.
+    </div>
+  </body>
+</html>
